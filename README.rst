@@ -16,9 +16,7 @@ Installation notes
 
     RALLY_DB = "mysql://rally:password@127.0.0.1/rally"
 
-Create or clone templates at default directory /srv/heat/env or set `RALLY_ROOT` variable to point to custom location.
-
-The name of the launched stack comes from <template_name>_<env_name>.
+Create or clone scenarios at default directory /srv/rally/scenarios or set `RALLY_ROOT` variable to point to custom location.
 
 Serving scenarios
 -----------------
@@ -26,13 +24,13 @@ Serving scenarios
 .. code-block:: bash
 
 	root@web01:/srv/rally# ls -la /srv/rally/scenarios/tasks/scenarios/nova/
-								  boot-and-delete-multiple.yaml
-								  boot-and-delete-server-with-keypairs.yaml
-								  boot-and-delete-server-with-secgroups.yaml
-								  boot-and-delete.yaml
-								  boot-from-volume-and-delete.yaml
-								  boot-snapshot-boot-delete.yaml
-								  create-and-delete-secgroups.yaml
+		boot-and-delete-multiple.yaml
+		boot-and-delete-server-with-keypairs.yaml
+		boot-and-delete-server-with-secgroups.yaml
+		boot-and-delete.yaml
+		boot-from-volume-and-delete.yaml
+		boot-snapshot-boot-delete.yaml
+		create-and-delete-secgroups.yaml
 
 Read more
 ---------
