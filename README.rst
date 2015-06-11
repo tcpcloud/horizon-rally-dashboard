@@ -8,14 +8,11 @@ Installation notes
 ------------------
 
 * add `benchmark_dashboard` to INSTALLED_APPS tuple
-* add `benchmark_dashboard.overrides` to `customization_module` in HORIZON_CONFIG or include it from other `customization_module`
-* the default path for templates is `/srv/heat/env`, but can be set by `RALLY_ROOT` variable
-
-*Example settings for custom Heat templates*
+* the default path for scenarios is `/srv/rally/scenarios`, but can be set by `RALLY_ROOT` variable
 
 .. code-block:: python
 
-    RALLY_ROOT = '/srv/heat/env'
+    RALLY_ROOT = '/srv/rally/scenarios'
 
     RALLY_DB = "mysql://rally:password@127.0.0.1/rally"
 
@@ -23,20 +20,19 @@ Create or clone templates at default directory /srv/heat/env or set `RALLY_ROOT`
 
 The name of the launched stack comes from <template_name>_<env_name>.
 
-Template directory structure
-----------------------------
-
-This extensions requires that templates are saved in `template` directory and corresponding 
-environments in `environment/<template_name>` directories.
-
-Sample template structure with 1 template and 3 possible environments, please note the file extensions as they need to match as well.
+Serving scenarios
+-----------------
 
 .. code-block:: bash
 
-    $RALLY_ROOT/template/contrail_service_chaing.hot
-    $RALLY_ROOT/env/contrail_service_chaing/project01.env
-    $RALLY_ROOT/env/contrail_service_chaing/project02.env
-    $RALLY_ROOT/env/contrail_service_chaing/lab01.env
+	root@web01:/srv/rally# ls -la /srv/rally/scenarios/tasks/scenarios/nova/
+								  boot-and-delete-multiple.yaml
+								  boot-and-delete-server-with-keypairs.yaml
+								  boot-and-delete-server-with-secgroups.yaml
+								  boot-and-delete.yaml
+								  boot-from-volume-and-delete.yaml
+								  boot-snapshot-boot-delete.yaml
+								  create-and-delete-secgroups.yaml
 
 Read more
 ---------
