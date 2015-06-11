@@ -27,7 +27,9 @@ class DetailTask(tables.LinkAction):
         return reverse(self.url, args=(datum['uuid'],))
 
     def allowed(self, request, instance):
-        return True
+        if instance.get('services', None):
+            return True
+        return False
 
 
 class DownloadTaskReport(tables.LinkAction):
@@ -40,7 +42,9 @@ class DownloadTaskReport(tables.LinkAction):
         return reverse(self.url, args=(datum['uuid'],))
 
     def allowed(self, request, instance):
-        return True
+        if instance.get('services', None):
+            return True
+        return False
 
 
 class TaskTable(tables.DataTable):
