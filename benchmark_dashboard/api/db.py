@@ -14,8 +14,6 @@ from rally.benchmark.processing import plot
 from rally.benchmark.processing.plot import _process_results
 from rally.db import api as _db_api
 
-from .base import ApiBase
-
 CONF = cfg.CONF
 
 _BACKEND_MAPPING = {"sqlalchemy": "rally.db.sqlalchemy.api"}
@@ -36,7 +34,7 @@ def _patch_db_config():
     _db_api.IMPL = IMPL
 
 
-class DbBackend(ApiBase):
+class DbBackend(object):
 
     """Base api
     """
@@ -46,7 +44,7 @@ class DbBackend(ApiBase):
         super(DbBackend, self).__init__(*args, **kwargs)
 
 
-class Task(object):
+class Task(DbBackend):
 
     """Task api encapsulation
     """
@@ -141,7 +139,7 @@ class Deployment(object):
         return db.deployment_list()
 
 
-class Api(ApiBase):
+class Api(DbBackend):
 
     """base encapsulation for us
     """
