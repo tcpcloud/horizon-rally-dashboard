@@ -1,11 +1,19 @@
 
+import json
+import os
+
+import jsonschema
 from django.conf import settings
 from oslo_config import cfg
 from oslo_db import api as db_api
 from oslo_db import options as db_options
-from rally import db, objects
+from oslo_utils import uuidutils
+from rally import api, db, objects
+from rally.benchmark.processing import plot
+from rally.benchmark.processing.plot import _process_results
 from rally.db import api as _db_api
-from rally import api
+
+from .base import ApiBase
 
 CONF = cfg.CONF
 
@@ -27,34 +35,15 @@ def _patch_db_config():
     _db_api.IMPL = IMPL
 
 
-class ApiBase(object):
+class DbBackend(ApiBase):
 
     """Base api
     """
 
     def __init__(self, *args, **kwargs):
         _patch_db_config()
-        super(ApiBase, self).__init__(*args, **kwargs)
+        super(DbBackend, self).__init__(*args, **kwargs)
 
-    def list(self):
-        raise NotImplementedError
-
-    def get(self, id=None):
-        raise NotImplementedError
-
-    def save(self, id=None):
-        raise NotImplementedError
-
-    def delete(self, id=None):
-        raise NotImplementedError
-
-
-from rally.benchmark.processing import plot
-from rally.benchmark.processing.plot import _process_results
-import os
-import jsonschema
-from oslo_utils import uuidutils
-import json
 
 class Task(object):
 

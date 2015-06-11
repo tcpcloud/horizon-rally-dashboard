@@ -17,6 +17,8 @@ Installation notes
 
     RALLY_ROOT = '/srv/heat/env'
 
+    RALLY_DB = "mysql://rally:password@127.0.0.1/rally"
+
 Create or clone templates at default directory /srv/heat/env or set `RALLY_ROOT` variable to point to custom location.
 
 The name of the launched stack comes from <template_name>_<env_name>.
