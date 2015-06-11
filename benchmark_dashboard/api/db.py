@@ -2,6 +2,7 @@
 import json
 import os
 
+from rally import consts
 import jsonschema
 from django.conf import settings
 from oslo_config import cfg
@@ -117,6 +118,10 @@ class Task(object):
                        abort_on_sla_failure=False)
 
         return self.detailed(task['uuid'])
+
+    def delete(self, uuid, force=True):
+        status = None if force else consts.TaskStatus.FINISHED
+        objects.Task.delete_by_uuid(uuid, status=status)
 
     def detailed(self, uuid):
         return db.task_get_detailed(uuid)

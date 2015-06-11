@@ -3,6 +3,8 @@ from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy as _
 from horizon import tables
 
+from benchmark_dashboard.api import rally
+
 
 class SelectTask(tables.LinkAction):
     name = "task_run"
@@ -15,6 +17,20 @@ class SelectTask(tables.LinkAction):
 
     def allowed(self, request, instance):
         return True
+
+
+class DeleteTask(tables.DeleteAction):
+
+    data_type_singular = 'Task'
+    data_type_plural = 'Tasks'
+    action_present = "Delete"
+    action_present_plural = "Delete"
+
+    def allowed(self, request, instance=None):
+        return True
+
+    def action(self, request, obj_id):
+        rally.tasks.delete(obj_id)
 
 
 class DetailTask(tables.LinkAction):
@@ -64,8 +80,11 @@ class TaskTable(tables.DataTable):
     def get_object_id(self, obj):
         return obj.get("uuid")
 
+    def get_display_name(self, obj):
+        return obj.get("uuid")
+
     class Meta:
         name = "tasks"
         verbose_name = _("Tasks History")
-        row_actions = (DetailTask, DownloadTaskReport)
-        table_actions = (SelectTask,)
+        row_actions = (DetailTask, DownloadTaskReport, DeleteTask)
+        table_actions = (SelectTask, DeleteTask)
