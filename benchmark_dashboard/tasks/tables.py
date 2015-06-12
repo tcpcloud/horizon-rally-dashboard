@@ -3,6 +3,7 @@ from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy as _
 from horizon import tables
 
+from horizon_contrib.tables import FilterAction
 from benchmark_dashboard.api import rally
 
 
@@ -23,14 +24,34 @@ class DeleteTask(tables.DeleteAction):
 
     data_type_singular = 'Task'
     data_type_plural = 'Tasks'
-    action_present = "Delete"
-    action_present_plural = "Delete"
+    action_present = _("Delete")
+    action_present_plural = _("Delete")
 
     def allowed(self, request, instance=None):
+        if instance and instance['status'] == 'running':
+            return False
         return True
 
     def action(self, request, obj_id):
         rally.tasks.delete(obj_id)
+
+
+class AbortTask(tables.DeleteAction):
+
+    name = "abort"
+    data_type_singular = 'Task'
+    data_type_plural = 'Tasks'
+    action_present = _("Abort")
+    action_past = _("Aborted")
+    action_present_plural = _("Abort")
+
+    def allowed(self, request, instance=None):
+        if instance and instance['status'] == 'running':
+            return True
+        return False
+
+    def action(self, request, obj_id):
+        rally.tasks.abort(obj_id)
 
 
 class DetailTask(tables.LinkAction):
@@ -75,7 +96,7 @@ class TaskTable(tables.DataTable):
     updated_at = tables.Column("updated_at", verbose_name=_('Updated at'))
     duration = tables.Column("duration", verbose_name=_('Duration'))
     status = tables.Column("status", verbose_name=_('Status'))
-    #results = tables.Column("results", verbose_name=_('Results'))
+    tag = tables.Column("tag", verbose_name=_('Tag'))
 
     def get_object_id(self, obj):
         return obj.get("uuid")
@@ -86,5 +107,5 @@ class TaskTable(tables.DataTable):
     class Meta:
         name = "tasks"
         verbose_name = _("Tasks History")
-        row_actions = (DetailTask, DownloadTaskReport, DeleteTask)
-        table_actions = (SelectTask, DeleteTask)
+        row_actions = (DetailTask, DownloadTaskReport, DeleteTask, AbortTask,)
+        table_actions = (FilterAction, SelectTask, AbortTask, DeleteTask,)

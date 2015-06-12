@@ -42,7 +42,7 @@ def create_upload_form_attributes(prefix, input_type, name):
     return attributes
 
 
-class LocalTemplateStackForm(forms.SelfHandlingForm):
+class TaskSelectForm(forms.SelfHandlingForm):
 
     class Meta:
         name = _('Launch Template')
@@ -56,9 +56,6 @@ class LocalTemplateStackForm(forms.SelfHandlingForm):
         widget=forms.widgets.HiddenInput,
         required=False)
 
-    parameters = forms.CharField(
-        widget=forms.widgets.HiddenInput,
-        required=False)
 
     stack_name = forms.CharField(
         widget=forms.widgets.HiddenInput,
@@ -67,6 +64,9 @@ class LocalTemplateStackForm(forms.SelfHandlingForm):
     edit = forms.BooleanField(
         label=_('Edit ?'),
         help_text=_('Edit before run task.'),
+        required=False)
+
+    tag = forms.CharField(
         required=False)
 
     deployment = forms.ChoiceField(label=_('Deployment'),
@@ -89,7 +89,7 @@ class LocalTemplateStackForm(forms.SelfHandlingForm):
 
     def __init__(self, request, *args, **kwargs):
         self.next_view = kwargs.pop('next_view')
-        super(LocalTemplateStackForm, self).__init__(request, *args, **kwargs)
+        super(TaskSelectForm, self).__init__(request, *args, **kwargs)
 
         for service in get_services():
             attributes = create_upload_form_attributes(
@@ -104,7 +104,7 @@ class LocalTemplateStackForm(forms.SelfHandlingForm):
             self.fields["task____%s" % service[0]] = field
 
     def clean(self):
-        cleaned = super(LocalTemplateStackForm, self).clean()
+        cleaned = super(TaskSelectForm, self).clean()
 
         service_name = cleaned["service"]
         task_name = cleaned["task____%s" % service_name]
@@ -125,8 +125,6 @@ class LocalTemplateStackForm(forms.SelfHandlingForm):
         # redirect to edit
         if data.pop("edit"):
             kwargs = fields
-            # NOTE (majklk) provide loaded parameters as defaults
-            # maybe exist better way to do this
             # NOTE (gabriel): This is a bit of a hack, essentially rewriting this
             # request so that we can chain it as an input to the next view...
             # but hey, it totally works.
@@ -135,8 +133,12 @@ class LocalTemplateStackForm(forms.SelfHandlingForm):
             return self.next_view.as_view()(request, **kwargs)
 
         else:
-            task = rally.tasks.create(
-                task_raw, data.get('deployment'), **fields['context_data'])
+            try:
+                task = rally.tasks.create(
+                    task_raw, data.get('deployment'), data.get("tag", None), **fields['context_data'])
+                messages.success(request, 'Task {} was successfully started.'.format(task['uuid']))
+            except Exception as e:
+                raise e
 
         return True
 
@@ -149,4 +151,4 @@ class TaskStartForm(forms.SelfHandlingForm):
 
     def handle(self, request, data):
 
-        raise Exception(data)
+        raise NotImplementedError

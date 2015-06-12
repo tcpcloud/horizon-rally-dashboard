@@ -16,6 +16,17 @@ Installation notes
 
     RALLY_DB = "mysql://rally:password@127.0.0.1/rally"
 
+    RALLY_PLUGINS = [
+        'rally.plugins.openstack',
+        'rally.plugins.common'
+    ]
+
+    # or load all
+
+    RALLY_PLUGINS = [
+        'rally.plugins',
+    ]
+
 Create or clone scenarios at default directory /srv/rally/scenarios or set `RALLY_ROOT` variable to point to custom location.
 
 Serving scenarios
@@ -23,14 +34,29 @@ Serving scenarios
 
 .. code-block:: bash
 
-	root@web01:/srv/rally# ls -la /srv/rally/scenarios/tasks/scenarios/nova/
-		boot-and-delete-multiple.yaml
-		boot-and-delete-server-with-keypairs.yaml
-		boot-and-delete-server-with-secgroups.yaml
-		boot-and-delete.yaml
-		boot-from-volume-and-delete.yaml
-		boot-snapshot-boot-delete.yaml
-		create-and-delete-secgroups.yaml
+    root@web01:/srv/rally# ls -la /srv/rally/scenarios/tasks/scenarios/nova/
+        boot-and-delete-multiple.yaml
+        boot-and-delete-server-with-keypairs.yaml
+        boot-and-delete-server-with-secgroups.yaml
+        boot-and-delete.yaml
+        boot-from-volume-and-delete.yaml
+        boot-snapshot-boot-delete.yaml
+        create-and-delete-secgroups.yaml
+
+Long running tasks
+------------------
+
+We create new Thread for every task, which is basically wrong and may cause overload your Horizon, but you can simple overwrite async task behaviour.
+
+.. code-block:: python
+
+    def run_async(method):
+
+        # call Celery or whatever
+
+        Thread(target=method, args=[]).start()
+
+Set it to ``benchmark_dashboard.utils.async``
 
 Read more
 ---------

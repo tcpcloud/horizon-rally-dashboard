@@ -1,12 +1,13 @@
 
 from __future__ import absolute_import
 
-import sys
 import glob
+import sys
 from os.path import basename
-from django.conf import settings
-from yaml import load, dump
 
+from django.conf import settings
+from rally import exceptions
+from yaml import load
 
 RALLY_ROOT = getattr(settings, "RALLY_ROOT", "/srv/rally/scenarios/tasks")
 
@@ -16,9 +17,6 @@ CONTEXT_PATH = "contexts"
 EXT = ".yaml"
 
 EXT_MASK = "*%s" % EXT
-
-
-from rally import exceptions
 
 
 class FailedToLoadTask(exceptions.RallyException):
@@ -166,6 +164,7 @@ def get_task_filename(name):
     ])
 
     return path
+
 
 def get_task_data(name):
     """load and return scenario
