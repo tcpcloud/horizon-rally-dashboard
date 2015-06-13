@@ -4,6 +4,8 @@ Horizon Rally Dashboard
 
 Simple Rally Dashboard which provide interface for managing benchmark scenarios and their results.
 
+For more infromation read my blog post `Benchmarking OpenStack for Humans <http://majklk.cz/blog/2015/06/11/benchmarking-openstack-humans/>`_
+
 Installation notes
 ------------------
 
