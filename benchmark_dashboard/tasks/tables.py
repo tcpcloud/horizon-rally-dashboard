@@ -3,7 +3,7 @@ from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy as _
 from horizon import tables
 
-from horizon_contrib.tables import FilterAction
+from benchmark_dashboard.utils.tables import FilterAction
 from benchmark_dashboard.api import rally
 
 
