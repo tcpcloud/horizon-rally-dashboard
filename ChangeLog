@@ -1,0 +1,19 @@
+CHANGES
+=======
+
+2015.6.0
+--------
+
+* cleanup angular stuff
+* restrict permissions
+* added blog post link
+* pip installable
+* no dependency to horizon-contrib
+* pluggable loading of rally plugins and properly start Task
+* next cleanup
+* cleanup
+* fix API inheritence
+* delete task action
+* disable task result and report if is not present
+* small cleanup
+* Initial commit
