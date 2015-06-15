@@ -106,6 +106,6 @@ class TaskTable(tables.DataTable):
 
     class Meta:
         name = "tasks"
-        verbose_name = _("Tasks History")
+        verbose_name = _("Tasks")
         row_actions = (DetailTask, DownloadTaskReport, DeleteTask, AbortTask,)
         table_actions = (FilterAction, SelectTask, AbortTask, DeleteTask,)

@@ -55,7 +55,8 @@ class DetailTaskView(generic.TemplateView):
         source, scenarios = rally.tasks.report(self.kwargs['task_id'])
         result = template.render(data=json.dumps(scenarios),
                                  source=json.dumps(source))
-        return {'source': result}
+        return {'source': result,
+                'title': _("Task Detail %s" % self.kwargs['task_id'])}
 
 
 class DownloadTaskReportView(generic.TemplateView):
