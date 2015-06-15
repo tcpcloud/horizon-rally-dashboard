@@ -1,0 +1,30 @@
+.aside { margin:0 20px 0 0; display:block; width:255px; float:left }
+.aside > div { margin-bottom: 15px }
+.aside > div div:first-child { border-top-left-radius:4px; border-top-right-radius:4px }
+.aside > div div:last-child { border-bottom-left-radius:4px; border-bottom-right-radius:4px }
+.nav-group { color:#678; background:#eee; border:1px solid #ddd; margin-bottom:-1px; display:block; padding:8px 9px; font-weight:bold; text-aligh:left; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; cursor:pointer }
+.nav-group.expanded { color:#469 }
+.nav-group.active { background:#428bca; background-image:linear-gradient(to bottom, #428bca 0px, #3278b3 100%); border-color:#3278b3; color:#fff }
+.nav-item { color:#555; background:#fff; border:1px solid #ddd; font-size:12px; display:block; margin-bottom:-1px; padding:8px 10px; text-aligh:left; text-overflow:ellipsis; white-space:nowrap; overflow:hidden; cursor:pointer }
+.nav-item:hover { background:#f8f8f8 }
+.nav-item.active, .nav-item.active:hover { background:#428bca; background-image:linear-gradient(to bottom, #428bca 0px, #3278b3 100%); border-color:#3278b3; color:#fff }
+
+.tabs { list-style:outside none none; margin:0 0 5px; padding:0; border-bottom:1px solid #ddd }
+.tabs:after { clear:both }
+.tabs li { float:left; margin-bottom:-1px; display:block; position:relative }
+.tabs li div { border:1px solid transparent; border-radius:4px 4px 0 0; line-height:20px; margin-right:2px; padding:10px 15px; color:#428bca }
+.tabs li div:hover { border-color:#eee #eee #ddd; background:#eee; cursor:pointer; }
+.tabs li.active div { background:#fff; border-color:#ddd #ddd transparent; border-style:solid; border-width:1px; color:#555; cursor:default }
+.failure-mesg { color:#900 }
+.failure-trace { color:#333; white-space:pre; overflow:auto }
+
+.chart { height:300px }
+.chart .chart-dropdown { float:right; margin:0 35px 0 }
+.chart.lesser { padding:0; margin:0; float:left; width:40% }
+.chart.larger { padding:0; margin:0; float:left; width:59% }
+
+.expandable { cursor:pointer }
+.clearfix { clear:both }
+.top-margin { margin-top:40px !important }
+.sortable > .arrow { display:inline-block; width:12px; height:inherit; color:#c90 }
+.content-main { margin:0 5px; display:block; float:left }

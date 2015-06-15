@@ -1,10 +1,3 @@
-<!doctype html>
-<html<%block name="html_attr"/>>
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rally | <%block name="title_text"/></title>
-  <%block name="libs"/>
   <script type="text/javascript"><%block name="js_before"/></script>
   <style>
     body { margin:0 0 50px; padding:0; font-size:14px; font-family:Helvetica,Arial,sans-serif }
@@ -33,11 +26,7 @@
     .content-wrap {<%block name="css_content_wrap"> margin:0 auto; padding:0 5px </%block>}
     <%block name="media_queries"/>
   </style>
-</head>
-<body<%block name="body_attr"/>>
 
   <%block name="content"/>
 
   <script type="text/javascript"><%block name="js_after"/></script>
-</body>
-</html>

@@ -1,48 +1,19 @@
+{% extends "base.html" %}
+
+{% block css %}
+
+  {{ block.super }}
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.1.15-beta/nv.d3.min.css">
+  <link rel="stylesheet" href="{{ STATIC_URL }}benchmark/css/report.css">
+
+{% endblock %}
+
 {% load branding i18n %}
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta content='IE=edge' http-equiv='X-UA-Compatible' />
-    <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
-    {% include "horizon/_custom_meta.html" %}
-    <title>{% block title %}{% endblock %} - {% site_branding %}</title>
-    {% comment %} Load CSS sheets before Javascript  {% endcomment %}
-    {% block css %}
-      {% include "_stylesheets.html" %}
-    {% endblock %}
-  </head>
-  <body id="{% block body_id %}{% endblock %}" ng-app='hz'>
-    <noscript>
-      <div class="javascript_disabled_alert">
-        This application requires JavaScript to be enabled on your web browser.
-      </div>
-    </noscript>
-    {% block content %}
-      <div id="container">
-        <div class='topbar'>
-          {% include "_header.html" %}
-        </div>
-        <div id='main_content'>
-          {% include "horizon/_messages.html" %}
-          {% block sidebar %}
-            {% include 'horizon/common/_sidebar.html' %}
-          {% endblock %}
-          <div id='content_body'>
-            <div class="row">
-              <div class="col-xs-12">
-                {% block main %}{{ source|safe }}{% endblock %}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    {% endblock %}
-    <div id="footer">
-      {% block footer %}{% endblock %}
-    </div>
-    {% block js %}
-      {% include "horizon/_scripts.html" %}
-    {% endblock %}
-    <div id="modal_wrapper"></div>
-  </body>
-</html>
+{% block main %}{{ source|safe }}{% endblock %}
+
+{% block js %}
+  {% include "horizon/_scripts.html" %}
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.4.13/d3.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.1.15-beta/nv.d3.min.js"></script>
+{% endblock %}
