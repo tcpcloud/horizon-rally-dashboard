@@ -56,14 +56,8 @@ class TaskSelectForm(forms.SelfHandlingForm):
         widget=forms.widgets.HiddenInput,
         required=False)
 
-
     stack_name = forms.CharField(
         widget=forms.widgets.HiddenInput,
-        required=False)
-
-    edit = forms.BooleanField(
-        label=_('Edit ?'),
-        help_text=_('Edit before run task.'),
         required=False)
 
     tag = forms.CharField(
@@ -103,6 +97,11 @@ class TaskSelectForm(forms.SelfHandlingForm):
                                       required=False)
             self.fields["task____%s" % service[0]] = field
 
+        self.fields['edit'] = forms.BooleanField(
+            label=_('Edit ?'),
+            help_text=_('Edit before run task.'),
+            required=False)
+
     def clean(self):
         cleaned = super(TaskSelectForm, self).clean()
 
@@ -119,6 +118,7 @@ class TaskSelectForm(forms.SelfHandlingForm):
         fields = {
             'deployment': data.get('deployment'),
             'task_data': task_raw,
+            'tag': data.get('tag', None),
             'context_data': get_context_data(data.get('context')),
         }
 
@@ -136,7 +136,8 @@ class TaskSelectForm(forms.SelfHandlingForm):
             try:
                 task = rally.tasks.create(
                     task_raw, data.get('deployment'), data.get("tag", None), **fields['context_data'])
-                messages.success(request, 'Task {} was successfully started.'.format(task['uuid']))
+                messages.success(
+                    request, 'Task {} was successfully started.'.format(task['uuid']))
             except Exception as e:
                 raise e
 
@@ -145,10 +146,35 @@ class TaskSelectForm(forms.SelfHandlingForm):
 
 class TaskStartForm(forms.SelfHandlingForm):
 
+    tag = forms.CharField(
+        required=False)
+
+    deployment = forms.ChoiceField(label=_('Deployment'),
+                                   choices=[
+        (d['uuid'], d['name']) for d in rally.deployments.list()],
+        widget=forms.Select(),
+        required=True)
+
+    context_data = forms.CharField(
+        widget=forms.widgets.Textarea,
+        required=False)
+
     task_data = forms.CharField(
         widget=forms.widgets.Textarea,
         required=False)
 
     def handle(self, request, data):
 
-        raise NotImplementedError
+        try:
+            task = rally.tasks.create(
+                data.get('task_data'),
+                data.get('deployment'),
+                data.get("tag", None),
+                **yaml.load(data.get('context_data')))
+            messages.success(
+                request,
+                'Task {} was successfully started.'.format(task['uuid']))
+        except Exception as e:
+            raise e
+
+        return True

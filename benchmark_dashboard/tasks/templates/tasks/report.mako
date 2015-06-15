@@ -11,8 +11,6 @@
     @media only screen and (min-width: 1200px) { .content-wrap { width:1180px } .content-main { width:890px } }
 </%block>
 
-
-
 <%block name="header_text">benchmark results</%block>
 
 <%block name="content">

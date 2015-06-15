@@ -86,7 +86,7 @@ class CreateTaskView(forms.ModalFormView):
 
 class SelectScenarioView(forms.ModalFormView):
     form_class = TaskSelectForm
-    template_name = 'benchmark/tasks/create.html'
+    template_name = 'benchmark/tasks/select.html'
     success_url = reverse_lazy('horizon:benchmark:tasks:index')
 
     def get_form_kwargs(self):

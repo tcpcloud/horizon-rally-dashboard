@@ -1,4 +1,2 @@
 
-from .db import Api
-
-rally = Api()
+from benchmark_dashboard.api.db import rally  # noqa
