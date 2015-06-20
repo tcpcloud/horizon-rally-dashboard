@@ -41,7 +41,7 @@ class TaskIndexView(tables.DataTableView):
 
         task_list = rally.tasks.list()
 
-        return task_list
+        return reversed(task_list)
 
 
 class DetailTaskView(generic.TemplateView):
