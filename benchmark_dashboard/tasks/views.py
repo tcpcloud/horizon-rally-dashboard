@@ -3,28 +3,14 @@ from __future__ import print_function
 
 import json
 import logging
-import os
-import sys
-import webbrowser
-from operator import attrgetter
 from tempfile import TemporaryFile
 
-import jsonschema
-import yaml
 from benchmark_dashboard.api import rally
 from django.core.servers.basehttp import FileWrapper
-from django.core.urlresolvers import reverse, reverse_lazy
 from django.http import HttpResponse  # noqa
-from django.template import RequestContext
 from django.utils.translation import ugettext_lazy as _
 from django.views import generic
-from heat_server_templates.utils import (CustomEncoder, get_environment_data,
-                                         get_environments, get_template_data,
-                                         get_templates)
-from horizon import exceptions, forms, tables, tabs
-from horizon.utils import memoized
-from oslo_utils import uuidutils
-from rally import api, consts, db, exceptions, objects
+from horizon import forms, tables
 
 from .forms import *
 from .tables import TaskTable
