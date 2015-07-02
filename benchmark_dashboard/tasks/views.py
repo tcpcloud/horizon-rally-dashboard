@@ -7,6 +7,7 @@ from tempfile import TemporaryFile
 
 from benchmark_dashboard.api import rally
 from django.core.servers.basehttp import FileWrapper
+from django.core.urlresolvers import reverse_lazy
 from django.http import HttpResponse  # noqa
 from django.utils.translation import ugettext_lazy as _
 from django.views import generic
