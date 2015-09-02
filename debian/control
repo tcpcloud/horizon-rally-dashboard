@@ -1,0 +1,22 @@
+Source: horizon-benchmark-dashboard
+Maintainer: Michael Kuty <michael.kuty@tcpcloud.eu>
+Section: python
+Priority: optional
+Build-Depends: python-all (>= 2.6.6-3), debhelper (>= 9), dh-python
+Build-Depends-Indep:
+ python-pbr,
+ python-setuptools,
+ git
+Standards-Version: 3.9.6
+X-Python-Version: >= 2.6
+Homepage: https://git.tcpcloud.eu/horizon-modules/horizon-benchmark-dashboard
+Vcs-Browser: https://git.tcpcloud.eu/horizon-modules/horizon-benchmark-dashboard
+Vcs-Git: https://git.tcpcloud.eu/horizon-modules/horizon-benchmark-dashboard.git
+
+Package: openstack-dashboard-benchmark
+Architecture: all
+Depends: ${misc:Depends}, ${python:Depends},
+ openstack-dashboard,
+ python-horizon-contrib
+Description: Benchmark plugin for Openstack Dashboard
+ Simple Benchmark for Openstack with Rally backend.

@@ -1,0 +1,1 @@
+debian/_99_benchmark.py /usr/share/openstack-dashboard/openstack_dashboard/enabled
