@@ -1,12 +1,12 @@
 Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: horizon-benchmark-dashboard
 Upstream-Contact: Michael Kuty <michael.kuty@tcpcloud.eu>
-Source: https://git.tcpcloud.eu/horizon-modules/horizon-benchmark-dashboard
+Source: git@github.com:tcpcloud/horizon-rally-dashboard.git
 
 Files: *
-Copyright: 2014-2015 tcp cloud
+Copyright: 2014-2015 tcp cloud a.s.
 License: Apache-2.0
-  Copyright (C) 2014-2015 tcp cloud
+  Copyright (C) 2014-2015 tcp cloud a.s.
   .
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.

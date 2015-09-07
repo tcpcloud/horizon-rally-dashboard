@@ -10,8 +10,8 @@ Build-Depends-Indep:
 Standards-Version: 3.9.6
 X-Python-Version: >= 2.6
 Homepage: https://git.tcpcloud.eu/horizon-modules/horizon-benchmark-dashboard
-Vcs-Browser: https://git.tcpcloud.eu/horizon-modules/horizon-benchmark-dashboard
-Vcs-Git: https://git.tcpcloud.eu/horizon-modules/horizon-benchmark-dashboard.git
+Vcs-Browser: https://github.com/tcpcloud/horizon-rally-dashboard.git
+Vcs-Git: https://github.com/tcpcloud/horizon-rally-dashboard.git
 
 Package: openstack-dashboard-benchmark
 Architecture: all

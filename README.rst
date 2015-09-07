@@ -1,16 +1,15 @@
+
 =======================
 Horizon Rally Dashboard
 =======================
 
-Simple Rally Dashboard which provide interface for managing benchmark scenarios and their results.
+Horizon Rally Dashboard for quick and easy running benchmark scenarios and viewing their results.
 
-For more infromation read my blog post `Benchmarking OpenStack for Humans <http://majklk.cz/blog/2015/06/11/benchmarking-openstack-humans/>`_
+Installation
+============
 
-Installation notes
-------------------
-
-* add `benchmark_dashboard` to INSTALLED_APPS tuple
-* the default path for scenarios is `/srv/rally/scenarios`, but can be set by `RALLY_ROOT` variable
+#. Add `benchmark_dashboard` to INSTALLED_APPS tuple.
+#. The default path for scenario definitions is at ``/srv/rally/scenarios``, but it altered with ``RALLY_ROOT`` variable in ``local_settings.py`` of your Horizon installation.
 
 .. code-block:: python
 
@@ -29,26 +28,30 @@ Installation notes
         'rally.plugins',
     ]
 
-Create or clone scenarios at default directory /srv/rally/scenarios or set `RALLY_ROOT` variable to point to custom location.
+Create or clone your scenario definitions to default location ``/srv/rally/scenarios`` or set ``RALLY_ROOT`` variable to your location.
+
+Usage
+=====
 
 Serving scenarios
 -----------------
 
 .. code-block:: bash
 
-    root@web01:/srv/rally# ls -la /srv/rally/scenarios/tasks/scenarios/nova/
-        boot-and-delete-multiple.yaml
-        boot-and-delete-server-with-keypairs.yaml
-        boot-and-delete-server-with-secgroups.yaml
-        boot-and-delete.yaml
-        boot-from-volume-and-delete.yaml
-        boot-snapshot-boot-delete.yaml
-        create-and-delete-secgroups.yaml
+    ls -la /srv/rally/scenarios/tasks/scenarios/nova/
+
+    boot-and-delete-multiple.yaml
+    boot-and-delete-server-with-keypairs.yaml
+    boot-and-delete-server-with-secgroups.yaml
+    boot-and-delete.yaml
+    boot-from-volume-and-delete.yaml
+    boot-snapshot-boot-delete.yaml
+    create-and-delete-secgroups.yaml
 
 Long running tasks
 ------------------
 
-We create new Thread for every task, which is basically wrong and may cause overload your Horizon, but you can simple overwrite async task behaviour.
+Now a new Thread is created for every task, which may cause Horizon overload, but async task behaviour can be overwritten:
 
 .. code-block:: python
 
@@ -58,9 +61,10 @@ We create new Thread for every task, which is basically wrong and may cause over
 
         Thread(target=method, args=[]).start()
 
-Set it to ``benchmark_dashboard.utils.async``
+Set the method to ``benchmark_dashboard.utils.async`` to enable acynchronous task.
 
 Read more
----------
+=========
 
+* https://rally.readthedocs.org/en/latest/
 * http://docs.openstack.org/developer/horizon/topics/tutorial.html
