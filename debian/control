@@ -9,7 +9,7 @@ Build-Depends-Indep:
  git
 Standards-Version: 3.9.6
 X-Python-Version: >= 2.6
-Homepage: https://git.tcpcloud.eu/horizon-modules/horizon-benchmark-dashboard
+Homepage: https://github.com/tcpcloud/horizon-rally-dashboard.git
 Vcs-Browser: https://github.com/tcpcloud/horizon-rally-dashboard.git
 Vcs-Git: https://github.com/tcpcloud/horizon-rally-dashboard.git
 

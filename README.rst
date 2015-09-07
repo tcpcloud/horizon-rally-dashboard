@@ -36,6 +36,8 @@ Usage
 Serving scenarios
 -----------------
 
+Scenarios are used from directory ``tasks/scenarios`` located under the ``RALLY_ROOT`` folder.
+
 .. code-block:: bash
 
     ls -la /srv/rally/scenarios/tasks/scenarios/nova/
@@ -61,7 +63,7 @@ Now a new Thread is created for every task, which may cause Horizon overload, bu
 
         Thread(target=method, args=[]).start()
 
-Set the method to ``benchmark_dashboard.utils.async`` to enable acynchronous task.
+Set the method to ``benchmark_dashboard.utils.async`` to enable asynchronous task.
 
 Read more
 =========
