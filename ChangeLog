@@ -1,19 +1,18 @@
 CHANGES
 =======
 
-2015.6.1
---------
+1.0.0
+-----
 
+* Doc fixes
+* add debian glue
+* added changelog
 * cleanup imports
 * task list reversed
 * just added titles
 * moved css to report.css
 * allow edit before start task, refactor api module and cleanup templates
 * meta update
-
-2015.6.0
---------
-
 * cleanup angular stuff
 * restrict permissions
 * added blog post link
