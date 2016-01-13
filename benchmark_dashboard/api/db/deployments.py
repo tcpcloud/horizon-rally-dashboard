@@ -1,16 +1,10 @@
 
-from rally import db
+from rally.api import Deployment
 
 
-class Deployment(object):
+class Deployment(Deployment):
 
     """Deployment api encapsulation
     """
 
-    def get(self, id):
-
-        return db.deployment_get(id)
-
-    def list(self):
-
-        return db.deployment_list()
+    pass

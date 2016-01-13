@@ -2,12 +2,11 @@
 import json
 import yaml
 from benchmark_dashboard.utils.async import run_async
-from rally import api, consts, db, exceptions, objects
-from rally.benchmark import engine
-from rally.benchmark.processing import plot
-from rally.benchmark.processing.plot import _process_results
+from rally import api, consts, exceptions
+from rally.task import engine
+from rally.task.processing import plot
 from rally.common import log as logging
-from rally.common import utils
+from rally.common import utils, db, objects
 
 from .deployments import Deployment
 
@@ -48,6 +47,7 @@ class Task(object):
         return task_list
 
     def report(self, task, **kw):
+        from rally.task.processing.plot import _process_results
         tasks_results = map(
             lambda x: {"key": x["key"],
                        "sla": x["data"]["sla"],
@@ -120,7 +120,7 @@ class Task(object):
         task = task or objects.Task(deployment_uuid=deployment["uuid"])
         LOG.info("Benchmark Task %s on Deployment %s" % (task["uuid"],
                                                          deployment["uuid"]))
-        benchmark_engine = engine.BenchmarkEngine(
+        benchmark_engine = engine.TaskEngine(
             config, task, admin=deployment["admin"], users=deployment["users"],
             abort_on_sla_failure=abort_on_sla_failure)
 

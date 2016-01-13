@@ -1,15 +1,9 @@
-import json
 import logging
 import yaml
-import six
 from django.utils.translation import ugettext_lazy as _
-from django.views.decorators.debug import sensitive_variables  # noqa
 from django.conf import settings
-from horizon import exceptions
 from horizon import forms
 from horizon import messages
-from oslo.utils import strutils
-from openstack_dashboard import api
 
 from benchmark_dashboard.utils import get_tasks, get_contexts, \
     get_task_filename, get_environment_data, CustomEncoder, get_task_data, get_services, get_context_data

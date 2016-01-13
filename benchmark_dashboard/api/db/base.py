@@ -4,14 +4,14 @@ from oslo_config import cfg
 from oslo_db import api as db_api
 from oslo_db import options as db_options
 from rally.common import log as logging
-from rally.db import api as _db_api
+from rally.common.db import api as _db_api
 from benchmark_dashboard.api.loader import load_all_stuff
 
 LOG = logging.getLogger(__name__)
 
 CONF = cfg.CONF
 
-_BACKEND_MAPPING = {"sqlalchemy": "rally.db.sqlalchemy.api"}
+_BACKEND_MAPPING = {"sqlalchemy": "rally.common.db.sqlalchemy.api"}
 
 DB_CONNECTION = getattr(settings,
                         'RALLY_DB', "mysql://rally:password@127.0.0.1/rally")
@@ -29,6 +29,7 @@ for plugin in RALLY_PLUGINS:
         load_all_stuff(plugin)
     except Exception as e:
         LOG.error(str(e))
+        pass
 
 
 def _patch_db_config():
