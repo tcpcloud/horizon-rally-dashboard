@@ -62,7 +62,7 @@ class Task(object):
                        "result": x["data"]["raw"],
                        "load_duration": x["data"]["load_duration"],
                        "full_duration": x["data"]["full_duration"]},
-            objects.Task.get(task).get_results())
+            api.Task.get(task).get_results())
         return tasks_results
 
     def _get_descriptions(self, base_cls, subclass_filter=None):
