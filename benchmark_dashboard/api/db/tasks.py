@@ -47,15 +47,10 @@ class Task(object):
         return task_list
 
     def report(self, task, **kw):
-        from rally.task.processing.plot import _process_results
-        tasks_results = map(
-            lambda x: {"key": x["key"],
-                       "sla": x["data"]["sla"],
-                       "result": x["data"]["raw"],
-                       "load_duration": x["data"]["load_duration"],
-                       "full_duration": x["data"]["full_duration"]},
+        from rally.task.processing.plot import _process_tasks
+        tasks_results = objects.Task.extend_results(
             objects.Task.get(task).get_results())
-        return _process_results(tasks_results)
+        return _process_tasks(tasks_results)
 
     def plot(self, task):
         return plot.plot(self.results(task))
